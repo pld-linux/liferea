@@ -13,6 +13,7 @@ BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libxml2-devel >= 2.0.0
 BuildRequires:	libgtkhtml-devel >= 2.4.0
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

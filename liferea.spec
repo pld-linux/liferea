@@ -2,7 +2,7 @@ Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	0.4.7b
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Internet
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
@@ -34,7 +34,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 \
+	libdir=%{_libdir}/%{name}
 
 %find_lang %{name}
 
@@ -47,5 +48,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_desktopdir}/*
-%{_libdir}/%{name}
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/lib*.so*
+%{_libdir}/%{name}/lib*.la
 #%{_pixmapsdir}/*

@@ -1,10 +1,11 @@
 Summary:	A RSS Feed reader
+Summary(pl):	Fead reader RSS
 Name:		liferea
 Version:	0.2.7
 Release:	0.1
 License:	GPL
 Group:		Applications/Internet
-Source0:	http://umn.dl.sourceforge.net/sourceforge/liferea/liferea-0.2.7.tar.gz
+Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 # Source0-md5:	d092db3324c775160c5b1b1d5259f3fd
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	gtk+2-devel

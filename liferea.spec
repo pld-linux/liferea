@@ -11,7 +11,10 @@ BuildRequires:	gtk+2-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Liferea is a GTK clone of FeedReader
+Liferea is a GTK clone of FeedReader.
+
+%description -l pl
+Liferea jest klonem FeedReadera korzystaj±cym z GTK.
 
 %prep
 %setup -q

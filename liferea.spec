@@ -2,13 +2,14 @@ Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	0.5.3
-%define cvs 20040805
-Release:	0.%{cvs}.1
+#%define cvs 20040805
+#Release:	0.%{cvs}.1
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-#Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-Source0:	%{name}-cvs-%{version}-%{cvs}.tar.bz2
-# Source0-md5:	55e0bbb17ff0d38e143b7f0d82ed456e
+Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
+# Source0-md5:	8658de8c6d31c39e237ab6aca92d387b
+#Source0:	%{name}-cvs-%{version}-%{cvs}.tar.bz2
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.4.0
 BuildRequires:	gtk+2-devel >= 2.2.0
@@ -41,8 +42,8 @@ Mozilla HTML browser module for Liferea.
 Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 
 %prep
-#%setup -q
-%setup -q -n %{name}
+%setup -q
+#%setup -q -n %{name}
 
 %build
 glib-gettextize -f
@@ -51,7 +52,8 @@ glib-gettextize -f
 %{__autoheader}
 %{__automake}
 %{__autoconf}
-%configure
+%configure \
+	--disable-schemas-install
 %{__make}
 
 %install
@@ -64,6 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 
 %find_lang %{name}
+
+%post
+%gconf_schema_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT

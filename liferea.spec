@@ -10,10 +10,13 @@ Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.4.0
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libxml2-devel >= 2.0.0
 BuildRequires:	libgtkhtml-devel >= 2.4.0
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)

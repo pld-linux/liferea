@@ -1,5 +1,5 @@
-Summary:	A RSS Feed reader
-Summary(pl):	Program do pobierania feedu news w formacie RSS
+Summary:	A RSS feed reader
+Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	0.3.8
 Release:	1
@@ -16,10 +16,11 @@ BuildRequires:	libgtkhtml-devel >= 2.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Liferea is a GTK clone of FeedReader.
+Liferea is a GTK+ clone of FeedReader.
 
 %description -l pl
-Liferea jest klonem FeedReadera korzystaj±cym z GTK.
+Liferea jest klonem, napisanym za pomoc± biblioteki GTK+, programu
+FeedReader.
 
 %prep
 %setup -q

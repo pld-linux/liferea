@@ -1,17 +1,18 @@
-diff -urN liferea-0.6.0.oryg/liferea.desktop liferea-0.6.0/liferea.desktop
---- liferea-0.6.0.oryg/liferea.desktop	2004-09-23 00:37:07.000000000 +0200
-+++ liferea-0.6.0/liferea.desktop	2004-09-23 01:10:17.882343272 +0200
-@@ -3,16 +3,19 @@
- Name[de]=Liferea Feed Reader
+diff -urN liferea-0.9.0b.orig/liferea.desktop liferea-0.9.0b/liferea.desktop
+--- liferea-0.9.0b.orig/liferea.desktop	2005-01-20 10:33:00.534927136 +0100
++++ liferea-0.9.0b/liferea.desktop	2005-01-20 10:34:11.591124952 +0100
+@@ -4,17 +4,20 @@
  Name[cs]=Liferea Feed Reader
  Name[es]=Liferea, lector de titulares RSS
+ Name[fr]=Liferea, lecteur de flux
 +Name[pl]=Liferea
  GenericName=Feed Reader
 +GenericName[pl]=Czytnik RSS
  Comment=Download and view feeds
  Comment[de]=Anzeigen von News-Feeds
  Comment[cs]=Stahování a čtení článků
- Comment[es]=Lea fuentes de noticias mediante titulares RSS y XML
+ Comment[es]=Lector de titulares RSS Liferea
+ Comment[fr]=Télécharge et visualise des flux
 +Comment[pl]=Program do pobierania informacji w formacie RSS
  Exec=liferea
  Icon=liferea.png

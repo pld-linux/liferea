@@ -1,3 +1,6 @@
+# Conditional build:
+%bcond_without	mozilla	# without mozilla
+
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
@@ -17,7 +20,7 @@ BuildRequires:	libxml2-devel >= 2.4.1
 BuildRequires:	libgtkhtml-devel >= 2.4.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	mozilla-devel
+%{?with_mozilla:BuildRequires:	mozilla-devel}
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +57,8 @@ glib-gettextize -f
 %{__automake}
 %{__autoconf}
 %configure \
-	--disable-schemas-install
+	--disable-schemas-install \
+    %{!?with_mozilla:--without-mozilla}
 %{__make}
 
 %install
@@ -86,6 +90,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/*
 %{_mandir}/man1/liferea.1*
 
+%if %{with mozilla}
 %files mozilla
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/liblihtmlm.so*
+%endif

@@ -1,12 +1,12 @@
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	0.4.7b
-Release:	2
+Version:	0.4.7c
+Release:	1
 License:	GPL
 Group:		Applications/Internet
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	45d7825048acb0d4cbf8195df676286c
+# Source0-md5:	0d55ff698e7bebc82d48fb2434bc10a0
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.4.0
 BuildRequires:	gnome-vfs2-devel >= 2.4.0

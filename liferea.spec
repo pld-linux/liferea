@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Internet
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	35bb917629f97dd98522922c7da79dc1
+# Source0-md5:	526b5fa11f5b6e5ab8ab863bd018d987
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.0.0

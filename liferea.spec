@@ -9,7 +9,6 @@ Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	4790c907f018e7f6c92e2b922a250ac8
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.4.0
-BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	gtk+2-devel >= 2.2.0
 BuildRequires:	libxml2-devel >= 2.0.0
 BuildRequires:	libgtkhtml-devel >= 2.4.0

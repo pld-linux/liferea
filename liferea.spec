@@ -1,18 +1,18 @@
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	0.4.5
+Version:	0.4.6
 Release:	1
 License:	GPL
 Group:		Applications/Internet
-Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	526b5fa11f5b6e5ab8ab863bd018d987
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	885a26726ea99e77682243296c763979
 URL:		http://liferea.sourceforge.net/
-BuildRequires:	GConf2-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel >= 2.0.0
+BuildRequires:	GConf2-devel >= 2.4.0
+BuildRequires:	gnome-vfs2-devel >= 2.4.0
 BuildRequires:	gtk+2-devel
 BuildRequires:	libxml2-devel >= 2.0.0
-BuildRequires:	libgtkhtml-devel >= 2.0.0
+BuildRequires:	libgtkhtml-devel >= 2.4.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,8 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
-#%{_desktopdir}/*
+%{_desktopdir}/*
 #%{_pixmapsdir}/*

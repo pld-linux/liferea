@@ -12,7 +12,7 @@ BuildRequires:	GConf2-devel >= 2.0.0
 BuildRequires:	atk-devel
 BuildRequires:	gnome-vfs2-devel >= 2.0.0
 BuildRequires:	gtk+2-devel
-BuildRequires:	libxml-devel >= 2.0.0
+BuildRequires:	libxml2-devel >= 2.0.0
 BuildRequires:	libgtkhtml-devel >= 2.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

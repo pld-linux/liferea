@@ -4,7 +4,7 @@ Name:		liferea
 Version:	0.4.9
 Release:	1
 License:	GPL
-Group:		Applications/Internet
+Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	cfaf765d39268a0b71b9e7bb92380285
 URL:		http://liferea.sourceforge.net/

@@ -5,7 +5,7 @@ Version:	0.9.0b
 Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
-Source0:	http://osdn.dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 # Source0-md5:	2781b3ae500e089497fcbee97bf73441
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/

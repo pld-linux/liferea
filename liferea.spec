@@ -1,27 +1,29 @@
 # Conditional build:
 %bcond_without	mozilla	# without mozilla
-
+#
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	0.9.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 # Source0-md5:	f0d5f184034697522e68e92909897043
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
-BuildRequires:	GConf2-devel >= 2.4.0
+BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+2-devel >= 2:2.4.0
-BuildRequires:	libxml2-devel >= 2.4.1
-BuildRequires:	libgtkhtml-devel >= 2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.6.3
+BuildRequires:	libxml2-devel >= 1:2.6.19
+BuildRequires:	libgtkhtml-devel >= 2.6.3
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 %{?with_mozilla:BuildRequires:	mozilla-devel}
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.196
+Requires(post,preun):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libgtkembedmoz.so libxpcom.so
@@ -73,7 +75,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 %find_lang %{name}
 
 %post
-%gconf_schema_install
+%gconf_schema_install /etc/gconf/schemas/liferea.schemas
+
+%preun
+if [ $1 = 0 ]; then
+	%gconf_schema_uninstall /etc/gconf/schemas/liferea.schemas
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT

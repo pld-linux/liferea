@@ -1,5 +1,5 @@
 Summary:	A RSS Feed reader
-Summary(pl):	Fead reader RSS
+Summary(pl):	Program do pobierania feedu news w formacie RSS
 Name:		liferea
 Version:	0.3.8
 Release:	1

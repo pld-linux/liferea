@@ -52,4 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/lib*.so*
 %{_libdir}/%{name}/lib*.la
+%{_mandir}/man1/liferea.1*
 #%{_pixmapsdir}/*

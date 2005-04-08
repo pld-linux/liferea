@@ -15,14 +15,14 @@ URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gtk+2-devel >= 2:2.6.3
+BuildRequires:	gtk+2-devel >= 2:2.6.4
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libgtkhtml-devel >= 2.6.3
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 %{?with_mozilla:BuildRequires:	mozilla-devel}
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.196
+BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,7 +52,7 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 %patch0 -p1
 
 %build
-glib-gettextize -f
+%{__glib_gettextize}
 %{__aclocal}
 %{__libtoolize}
 %{__autoheader}
@@ -75,12 +75,10 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 %find_lang %{name}
 
 %post
-%gconf_schema_install /etc/gconf/schemas/liferea.schemas
+%gconf_schema_install liferea.schemas
 
 %preun
-if [ $1 = 0 ]; then
-	%gconf_schema_uninstall /etc/gconf/schemas/liferea.schemas
-fi
+%gconf_schema_uninstall liferea.schemas
 
 %clean
 rm -rf $RPM_BUILD_ROOT

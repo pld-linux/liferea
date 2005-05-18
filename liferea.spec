@@ -1,5 +1,6 @@
 # Conditional build:
-%bcond_without	mozilla	# without mozilla
+%bcond_without	dbus		# without DBUS support
+%bcond_without	mozilla		# without mozilla
 #
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
@@ -15,6 +16,7 @@ URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
+%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.23}
 BuildRequires:	gtk+2-devel >= 2:2.6.4
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libgtkhtml-devel >= 2.6.3
@@ -60,7 +62,8 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
-    %{!?with_mozilla:--without-mozilla}
+	%{!?with_mozilla: --without-mozilla} \
+	%{!?with_dbus: --disable-dbus}
 %{__make}
 
 %install

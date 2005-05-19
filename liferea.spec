@@ -1,6 +1,7 @@
 # Conditional build:
 %bcond_without	dbus		# without DBUS support
 %bcond_without	mozilla		# without mozilla
+%bcond_with	mozilla_firefox	# build with mozilla-firefox-devel
 #
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
@@ -22,7 +23,13 @@ BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libgtkhtml-devel >= 2.6.3
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-%{?with_mozilla:BuildRequires:	mozilla-devel}
+%if %{with mozilla}
+%if %{with mozilla_firefox}
+BuildRequires:	mozilla-firefox-devel
+%else
+BuildRequires:	mozilla-devel
+%endif
+%endif
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2

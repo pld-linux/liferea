@@ -49,6 +49,11 @@ Summary:	Mozilla HTML browser module for Liferea
 Summary(pl):	Modu³ przegl±darki HTML dla Liferea oparty na Mozilli
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+%if %{with mozilla_firefox}
+Requires:	mozilla-firefox = %(rpm -q --qf '%{EPOCH}:%{VERSION}' mozilla-firefox)
+%else
+Requires:	mozilla-embedded = %(rpm -q --qf '%{EPOCH}:%{VERSION}' --whatprovides mozilla-embedded)
+%endif
 
 %description mozilla
 Mozilla HTML browser module for Liferea.

@@ -7,7 +7,7 @@ Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	0.9.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
@@ -33,6 +33,7 @@ BuildRequires:	mozilla-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(post,preun):	GConf2
+Requires:	%{name}-backend = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libgtkembedmoz.so libxpcom.so
@@ -44,6 +45,19 @@ Liferea is a GTK+ clone of FeedReader.
 Liferea jest klonem, napisanym za pomoc± biblioteki GTK+, programu
 FeedReader.
 
+%package gtkhtml
+Summary:	GtkHTML module for Liferea
+Summary(pl):	Modu³ GtkHTML dla Liferea
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-backend = %{version}-%{release}
+
+%description gtkhtml
+GtkHTML module for Liferea.
+
+%description gtkhtml -l pl
+Modu³ GtkHTML dla Liferea.
+
 %package mozilla
 Summary:	Mozilla HTML browser module for Liferea
 Summary(pl):	Modu³ przegl±darki HTML dla Liferea oparty na Mozilli
@@ -54,6 +68,7 @@ Requires:	%{name} = %{version}-%{release}
 %else
 Requires:	mozilla-embedded = %(rpm -q --qf '%{EPOCH}:%{VERSION}' --whatprovides mozilla-embedded)
 %endif
+Provides:	%{name}-backend = %{version}-%{release}
 
 %description mozilla
 Mozilla HTML browser module for Liferea.
@@ -103,12 +118,15 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/%{name}
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 %{_mandir}/man1/liferea.1*
+
+%files gtkhtml
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so*
 
 %if %{with mozilla}
 %files mozilla

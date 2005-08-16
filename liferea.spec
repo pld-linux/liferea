@@ -1,17 +1,18 @@
 # Conditional build:
 %bcond_without	dbus		# without DBUS support
 %bcond_without	mozilla		# without mozilla
+%bcond_without	gtkhtml		# without GtkHTML
 %bcond_with	mozilla_firefox	# build with mozilla-firefox-devel
 #
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	0.9.5
-Release:	2
+Version:	0.9.6
+Release:	1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	562c84cd394fd2faf7944990613117ca
+# Source0-md5:	325398d66a0b4fba6b004a2d04950cb5
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
@@ -20,7 +21,7 @@ BuildRequires:	automake
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.23}
 BuildRequires:	gtk+2-devel >= 2:2.6.4
 BuildRequires:	libxml2-devel >= 1:2.6.19
-BuildRequires:	libgtkhtml-devel >= 2.6.3
+%{?with_gtkhtml:BuildRequires:	libgtkhtml-devel >= 2.6.3}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 %if %{with mozilla}
@@ -89,8 +90,9 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
-	%{!?with_mozilla: --without-mozilla} \
-	%{!?with_dbus: --disable-dbus}
+	%{!?with_dbus: --disable-dbus} \
+	%{!?with_gtkhtml: --disable-gtkhtml2} \
+	%{!?with_mozilla: --disable-gecko}
 %{__make}
 
 %install
@@ -124,9 +126,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/*
 %{_mandir}/man1/liferea.1*
 
+%if %{with gtkhtml}
 %files gtkhtml
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so*
+%endif
 
 %if %{with mozilla}
 %files mozilla

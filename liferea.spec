@@ -9,7 +9,7 @@ Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	1.0
 %define		_rc RC1
-Release:	1
+Release:	1.%{_rc}.1
 License:	GPL
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}-%{_rc}.tar.gz

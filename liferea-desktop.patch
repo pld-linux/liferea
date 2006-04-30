@@ -13,6 +13,6 @@ diff -urN liferea-1.0.8/liferea.desktop liferea-1.0.8.new/liferea.desktop
  Terminal=false
  Type=Application
  Encoding=UTF-8
--Categories=Application;Network;
+-Categories=Network;News;
 +Categories=GTK;Network;News;
  Version=0.9.4

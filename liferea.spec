@@ -3,7 +3,7 @@
 %bcond_without	dbus		# without DBUS support
 %bcond_without	mozilla		# without mozilla
 %bcond_without	gtkhtml		# without GtkHTML
-%bcond_with	mozilla_firefox	# build with mozilla-firefox-devel
+%bcond_without	mozilla_firefox	# build with mozilla-firefox-devel
 #
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS

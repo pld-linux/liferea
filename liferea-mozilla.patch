@@ -1,0 +1,85 @@
+--- liferea-1.0.18.orig/src/mozilla/mozilla.c	2006-07-22 23:36:22.829558750 +0200
++++ liferea-1.0.18/src/mozilla/mozilla.c	2006-07-22 23:36:37.222458250 +0200
+@@ -41,7 +41,7 @@
+ 	   path here we would run into symbol incompatibilities
+ 	   when LD_LIBRARY_PATH points Liferea to gtkmozembed.so
+ 	   different from the one we compiled against */
+-	gtk_moz_embed_set_comp_path(NULL);
++	gtk_moz_embed_set_comp_path(MOZILLA_HOME);
+ 
+ 	mozembed_init();	
+ }
+--- liferea-1.0.18.orig/src/mozilla/Makefile.am	2006-07-22 23:36:22.829558750 +0200
++++ liferea-1.0.18/src/mozilla/Makefile.am	2006-07-23 00:37:31.294823500 +0200
+@@ -20,7 +20,7 @@
+ 	mozilla.c
+ 
+ liblihtmlm_la_LIBADD = $(PACKAGE_LIBS) $(MOZILLA_LIBS) $(INTLLIBS)
+-liblihtmlm_la_CFLAGS = $(MOZILLA_CFLAGS) $(PACKAGE_CFLAGS)
++liblihtmlm_la_CFLAGS = $(MOZILLA_CFLAGS) $(PACKAGE_CFLAGS) -DMOZILLA_HOME=\""$(MOZILLA_HOME)\""
+ liblihtmlm_la_CXXFLAGS = $(MOZILLA_CFLAGS) $(PACKAGE_CFLAGS)
+ 
+ if PLATFORM_WIN32
+--- liferea-1.0.18.orig/src/liferea.in	2006-07-22 23:36:22.785556000 +0200
++++ liferea-1.0.18/src/liferea.in	2006-07-23 01:14:52.062862750 +0200
+@@ -20,20 +20,6 @@
+ 	fi
+ }
+ 
+-look_for_mozilla() {
+-
+-	results=`ls -1d $1 2>/dev/null | sort -n`
+-	while [ -n "$results" ]
+-	do
+-		path=`echo "$results" | tail -n 1`
+-		results=`echo "$results" | grep -v $path`
+-		path=`dirname $path` 	# strip comm.jar
+-		path=`dirname $path`	# strip chrome
+-		run_with_mozilla $path
+-		
+-	done
+-}
+-
+ if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+ 	eval `dbus-launch`
+ 	export DBUS_SESSION_BUS_ADDRESS
+@@ -44,18 +30,5 @@
+ fi
+ 
+ @MOZILLA_LIB_DIR_SEARCH@
+-look_for_mozilla "/usr/lib/mozilla*/chrome/comm.jar"
+-look_for_mozilla "/usr/lib64/mozilla*/chrome/comm.jar"
+-look_for_mozilla "/usr/local/mozilla*/chrome/comm.jar"
+-look_for_mozilla "/opt/mozilla/chrome/comm.jar"
+-look_for_mozilla "/opt/mozilla/lib/chrome/comm.jar"
+-look_for_mozilla "/opt/gnome/lib/mozilla/chrome/comm.jar"
+-look_for_mozilla "/usr/lib/firefox*/chrome/comm.jar"
+-look_for_mozilla "/usr/lib64/firefox*/chrome/comm.jar"
+-look_for_mozilla "/usr/local/firefox*/chrome/comm.jar"
+-look_for_mozilla "/opt/firefox/chrome/comm.jar"
+-look_for_mozilla "/opt/firefox/lib/chrome/comm.jar"
+-# for FreeBSD 6:
+-look_for_mozilla "/usr/X11R6/lib/mozilla/chrome.jar"
+ 
+ exec "$dist_bin/liferea-bin" $params
+--- liferea-1.0.18.orig/configure.ac	2006-07-22 23:36:22.845559750 +0200
++++ liferea-1.0.18/configure.ac	2006-07-23 01:25:03.001044000 +0200
+@@ -155,8 +155,8 @@
+    
+    MOZILLA_INCLUDE_ROOT=`$PKG_CONFIG --cflags-only-I $gecko_provider-gtkmozembed | awk '{print $1}' | sed "s/^-I//"`
+    MOZILLA_INCLUDE_ROOT=`dirname $MOZILLA_INCLUDE_ROOT`
+-   MOZILLA_LIB_ROOT=`$PKG_CONFIG --libs-only-L $gecko_provider-gtkmozembed | awk '{print $1}' |  cut -c 3-`
+-   MOZILLA_LIB_DIR_SEARCH="look_for_mozilla \"$MOZILLA_LIB_ROOT\""
++   MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $gecko_provider-gtkmozembed`"
++   MOZILLA_LIB_DIR_SEARCH="run_with_mozilla \"$MOZILLA_HOME\""
+    
+    dnl Maybe we don't need all of this...
+    MOZILLA_CFLAGS="$MOZILLA_CFLAGS \
+@@ -203,6 +203,7 @@
+    AC_SUBST(MOZILLA_CFLAGS)
+    AC_SUBST(MOZILLA_LIBS)   
+    AC_SUBST(MOZILLA_LIB_DIR_SEARCH)
++   AC_SUBST([MOZILLA_HOME])
+ else
+    enable_mozilla=no
+ fi

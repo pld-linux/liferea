@@ -8,14 +8,13 @@
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.0.19
-Release:	2
+Version:	1.0.20
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	ca51d163b2ec831e91567b5a2c52effe
+# Source0-md5:	88e5e4f587b047d744b6a93e4dd7ddb1
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-mozilla.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf
@@ -82,7 +81,6 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__glib_gettextize}

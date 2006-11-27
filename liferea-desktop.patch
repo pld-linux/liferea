@@ -1,18 +1,11 @@
-diff -urN liferea-1.0.8/liferea.desktop liferea-1.0.8.new/liferea.desktop
---- liferea-1.0.8/liferea.desktop	2006-03-10 18:48:21.000000000 +0100
-+++ liferea-1.0.8.new/liferea.desktop	2006-03-31 23:34:43.000000000 +0200
-@@ -8,6 +8,7 @@
- Name[pl]=Czytnik RSS Liferea
- GenericName=Feed Reader
- GenericName[ca]=Lector de canals
-+GenericName[pl]=Czytnik RSS
- Comment=Download and view feeds
- Comment[ca]=Descarregueu i visualitzeu canals
- Comment[cs]=Stahování a čtení článků
-@@ -21,5 +22,5 @@
+diff -ur liferea-1.2-RC3-o/liferea.desktop liferea-1.2-RC3/liferea.desktop
+--- liferea-1.2-RC3-o/liferea.desktop	2006-11-25 11:13:15.000000000 -0700
++++ liferea-1.2-RC3/liferea.desktop	2006-11-26 12:07:55.000000000 -0700
+@@ -26,5 +26,5 @@
  Terminal=false
  Type=Application
  Encoding=UTF-8
 -Categories=Network;News;
 +Categories=GTK;Network;News;
  Version=0.9.4
+Only in liferea-1.2-RC3: liferea.desktop.orig

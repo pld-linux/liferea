@@ -5,15 +5,16 @@
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	mozilla_firefox	# build with mozilla-firefox-devel
 #
+%define	pre	RC3
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.0.25
-Release:	1
+Version:	1.2
+Release:	0.%{pre}.1
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	45d511c9eb829797336a60a4a86b5939
+Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}-%{pre}.tar.gz
+# Source0-md5:	30542c315370db12cc9598d3b809b2d5
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
@@ -79,11 +80,11 @@ Mozilla HTML browser module for Liferea.
 Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{pre}
 %patch0 -p1
 
 %build
-%{__glib_gettextize}
+#%{__glib_gettextize}
 %{__aclocal}
 %{__libtoolize}
 %{__autoheader}
@@ -109,9 +110,13 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 
 %post
 %gconf_schema_install liferea.schemas
+%update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall liferea.schemas
+
+%postun
+%update_icon_cache hicolor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -121,10 +126,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/*.so.*.*.*
+%{_iconsdir}/hicolor/48x48/apps/liferea.png
+%{_mandir}/pl/man1/liferea.1*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
 %{_mandir}/man1/liferea.1*
 
 %if %{with gtkhtml}

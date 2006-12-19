@@ -5,7 +5,6 @@
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	mozilla_firefox	# build with mozilla-firefox-devel
 #
-%define	pre	RC3
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
@@ -80,7 +79,7 @@ Mozilla HTML browser module for Liferea.
 Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 %patch0 -p1
 
 %build

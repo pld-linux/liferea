@@ -26,6 +26,7 @@ BuildRequires:	libnotify-devel >= 0.3.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
+BuildRequires:	libxslt-devel
 %if %{with mozilla}
 %if %{with mozilla_firefox}
 BuildRequires:	mozilla-firefox-devel

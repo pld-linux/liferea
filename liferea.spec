@@ -6,7 +6,7 @@
 %bcond_without	mozilla_firefox	# build with mozilla-firefox-devel
 #
 Summary:	A RSS feed reader
-Summary(pl.UTF-8):   Program do pobierania informacji w formacie RSS
+Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	1.2.4
 Release:	1
@@ -53,7 +53,7 @@ FeedReader.
 
 %package gtkhtml
 Summary:	GtkHTML module for Liferea
-Summary(pl.UTF-8):   Moduł GtkHTML dla Liferea
+Summary(pl.UTF-8):	Moduł GtkHTML dla Liferea
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-backend = %{version}-%{release}
@@ -66,7 +66,7 @@ Moduł GtkHTML dla Liferea.
 
 %package mozilla
 Summary:	Mozilla HTML browser module for Liferea
-Summary(pl.UTF-8):   Moduł przeglądarki HTML dla Liferea oparty na Mozilli
+Summary(pl.UTF-8):	Moduł przeglądarki HTML dla Liferea oparty na Mozilli
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 %if %{with mozilla_firefox}

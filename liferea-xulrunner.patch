@@ -1,0 +1,26 @@
+diff -urN liferea-1.2.7/src/mozilla/Makefile.am liferea-1.2.7.new/src/mozilla/Makefile.am
+--- liferea-1.2.7/src/mozilla/Makefile.am	2006-08-16 01:08:28.000000000 +0200
++++ liferea-1.2.7.new/src/mozilla/Makefile.am	2007-02-24 15:34:32.050623000 +0100
+@@ -37,14 +37,20 @@
+ 
+ ## the XulRunner support module
+ 
++XULRUNNER_EXTRA_CFLAGS = \
++	-I/usr/include/xulrunner/dom \
++	-I/usr/include/xulrunner/necko \
++	-I/usr/include/xulrunner/pref \
++	-I/usr/include/xulrunner/webbrwsr
++
+ liblihtmlx_la_SOURCES = \
+ 	mozembed.c mozembed.h \
+ 	mozsupport.cpp mozsupport.h \
+ 	xulrunner.c
+ 
+ liblihtmlx_la_LIBADD = $(PACKAGE_LIBS) $(XULRUNNER_LIBS) $(INTLLIBS)
+-liblihtmlx_la_CFLAGS = $(XULRUNNER_CFLAGS) $(PACKAGE_CFLAGS)  -DXULRUNNER_HOME=\""$(XULRUNNER_HOME)\""
+-liblihtmlx_la_CXXFLAGS = $(XULRUNNER_CFLAGS) $(PACKAGE_CFLAGS)
++liblihtmlx_la_CFLAGS = $(XULRUNNER_CFLAGS) $(XULRUNNER_EXTRA_CFLAGS) $(PACKAGE_CFLAGS) -DXULRUNNER_HOME=\""$(XULRUNNER_HOME)\""
++liblihtmlx_la_CXXFLAGS = $(XULRUNNER_CFLAGS) $(XULRUNNER_EXTRA_CFLAGS) $(PACKAGE_CFLAGS)
+ 
+ if PLATFORM_WIN32
+ 

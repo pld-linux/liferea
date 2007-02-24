@@ -15,7 +15,7 @@ Release:	0.1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	57d6dccc89d2a05af027b9c06dd145c4
+# Source0-md5:	e15b37b9f96606581c941431a38fd933
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 URL:		http://liferea.sourceforge.net/

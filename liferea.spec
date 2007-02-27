@@ -32,7 +32,7 @@ BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libxslt-devel >= 1.1.19
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	xulrunner-devel
+%{?with_xulrunner:BuildRequires:	xulrunner-devel}
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2

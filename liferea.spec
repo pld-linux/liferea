@@ -5,11 +5,15 @@
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	xulrunner	# without XULRunner backend
 #
+%ifarch %{x8664}
+%undefine	with_gtkhtml	# GtkHTML backend disabled on x86_64
+%endif
+#
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	1.2.7
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
@@ -35,6 +39,9 @@ Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
 Requires:	%{name}-backend = %{version}-%{release}
+%ifarch %{x8664}
+Obsoletes:	liferea-gtkhtml
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libgtkembedmoz.so libxpcom.so

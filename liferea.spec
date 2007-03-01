@@ -3,18 +3,19 @@
 %bcond_without	dbus		# without DBUS support
 %bcond_without	mozilla		# without mozilla
 %bcond_without	gtkhtml		# without GtkHTML
-%bcond_without	mozilla_firefox	# build with mozilla-firefox-devel
+%bcond_without	xulrunner	# without XULRunner backend
 #
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.2.4
+Version:	1.2.7
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	2bed06c06e7b90281cf51fa3e83ee023
+# Source0-md5:	e15b37b9f96606581c941431a38fd933
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-xulrunner.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf
@@ -27,15 +28,9 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libxslt-devel
-%if %{with mozilla}
-%if %{with mozilla_firefox}
-BuildRequires:	mozilla-firefox-devel
-%else
-BuildRequires:	mozilla-devel
-%endif
-%endif
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
+%{?with_xulrunner:BuildRequires:	xulrunner-devel}
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
@@ -69,11 +64,7 @@ Summary:	Mozilla HTML browser module for Liferea
 Summary(pl):	Modu³ przegl±darki HTML dla Liferea oparty na Mozilli
 Group:		X11/Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-%if %{with mozilla_firefox}
-%requires_eq	mozilla-firefox-libs
-%else
-Requires:	mozilla-embedded = %(rpm -q --qf '%{EPOCH}:%{VERSION}' --whatprovides mozilla-embedded)
-%endif
+%requires_eq_to	xulrunner xulrunner-devel	
 Provides:	%{name}-backend = %{version}-%{release}
 
 %description mozilla
@@ -85,6 +76,7 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 #%{__glib_gettextize}
@@ -97,7 +89,7 @@ Modu³ przegl±darki HTML dla Liferea oparty na Mozilli.
 	--disable-schemas-install \
 	%{!?with_dbus: --disable-dbus} \
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
-	%{!?with_mozilla: --disable-gecko}
+	%{!?with_xulrunner: --disable-xulrunner}
 %{__make}
 
 %install
@@ -143,8 +135,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so*
 %endif
 
-%if %{with mozilla}
+%if %{with xulrunner}
 %files mozilla
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlm.so*
+%attr(755,root,root) %{_libdir}/%{name}/liblihtmlx.so*
 %endif

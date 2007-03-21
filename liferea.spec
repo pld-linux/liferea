@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_without	dbus		# without DBUS support
-%bcond_without	mozilla		# without mozilla
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	xulrunner	# without XULRunner backend
 #
@@ -12,12 +11,12 @@
 Summary:	A RSS feed reader
 Summary(pl):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.2.7
-Release:	3
+Version:	1.2.8
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	e15b37b9f96606581c941431a38fd933
+# Source0-md5:	695e1c3bef330faa71a0d41706fbd104
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 URL:		http://liferea.sourceforge.net/

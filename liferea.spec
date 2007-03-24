@@ -3,6 +3,7 @@
 %bcond_without	dbus		# without DBUS support
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	xulrunner	# without XULRunner backend
+%bcond_without	lua		# without LUA scripting support
 #
 %ifarch %{x8664}
 %undefine	with_gtkhtml	# GtkHTML backend disabled on x86_64
@@ -18,6 +19,7 @@ Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 # Source0-md5:	695e1c3bef330faa71a0d41706fbd104
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
+Patch2:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf >= 2.59
@@ -30,6 +32,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libxslt-devel >= 1.1.19
+%{?with_lua:BuildRequires:	lua51-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 %{?with_xulrunner:BuildRequires:	xulrunner-devel}
@@ -82,6 +85,7 @@ Moduł przeglądarki HTML dla Liferea oparty na Mozilli.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 #%{__glib_gettextize}
@@ -94,6 +98,7 @@ Moduł przeglądarki HTML dla Liferea oparty na Mozilli.
 	--disable-schemas-install \
 	%{!?with_dbus: --disable-dbus} \
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
+	%{!?with_lua: --disable-lua} \
 	%{!?with_xulrunner: --disable-xulrunner}
 %{__make}
 

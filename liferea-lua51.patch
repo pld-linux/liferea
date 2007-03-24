@@ -1,0 +1,11 @@
+--- liferea-1.2.8/configure.ac.orig	2007-03-24 18:58:40.000000000 +0000
++++ liferea-1.2.8/configure.ac	2007-03-24 19:00:44.000000000 +0000
+@@ -139,7 +139,7 @@
+    dnl Lua 5.1 does include a lua.pc file, so it shouldn't be distribution specific
+    dnl However, the presence of lua.pc is certainly not a good indicator of lua version...
+    PKG_CHECK_MODULES([LUA50], [lua50 lualib50] ,has_lua50=yes,has_lua50=no)
+-   PKG_CHECK_MODULES([LUA51], [lua] ,has_lua51=yes,has_lua51=no)
++   PKG_CHECK_MODULES([LUA51], [lua51] ,has_lua51=yes,has_lua51=no)
+    
+    if test "x$has_lua51" = "xyes" ; then
+       LUA_CFLAGS="$LUA51_CFLAGS"

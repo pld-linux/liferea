@@ -5,6 +5,7 @@
 %bcond_without	gtkhtml		# without GtkHTML
 %bcond_without	xulrunner	# without XULRunner backend
 %bcond_without	lua		# without LUA scripting support
+%bcond_with	nm		# with NetworkManager support
 #
 %ifarch %{x8664}
 %undefine	with_gtkhtml	# GtkHTML backend disabled on x86_64
@@ -34,6 +35,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.19
 BuildRequires:	libxslt-devel >= 1.1.19
 %{?with_lua:BuildRequires:	lua51-devel}
+%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 %{?with_xulrunner:BuildRequires:	xulrunner-devel}
@@ -100,6 +102,7 @@ Moduł przeglądarki HTML dla Liferea oparty na Mozilli.
 	%{!?with_dbus: --disable-dbus} \
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
 	%{!?with_lua: --disable-lua} \
+	%{!?with_nm: --disable-nm} \
 	%{!?with_xulrunner: --disable-xulrunner}
 %{__make}
 

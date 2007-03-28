@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{_mandir}/man1/liferea.1*
 %if %{with lua}
-/usr/lib/liferea/libliscrlua.so
+%attr(755,root,root) %{_libdir}/%{name}/libliscrlua.so
 %endif
 
 %if %{with gtkhtml}

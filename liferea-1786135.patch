@@ -1,0 +1,16 @@
+--- branches/liferea-1_4/liferea/src/update.c	2007/08/29 20:36:59	3385
++++ branches/liferea-1_4/liferea/src/update.c	2007/09/02 00:00:02	3412
+@@ -505,7 +505,12 @@
+ update_process_result_idle_cb (gpointer user_data)
+ {
+ 	requestPtr request = (requestPtr)user_data;
+-	(request->callback) (request);
++	
++	if (request->callback)
++		(request->callback) (request);
++	else
++		update_request_free (request);
++		
+ 	return FALSE;
+ }
+ 

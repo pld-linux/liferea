@@ -1,0 +1,12 @@
+diff -urN liferea-1.4.2b/src/db.c liferea-1.4.2b.new/src/db.c
+--- liferea-1.4.2b/src/db.c	2007-09-18 23:57:16.000000000 +0200
++++ liferea-1.4.2b.new/src/db.c	2007-09-22 15:04:00.000000000 +0200
+@@ -1279,7 +1279,7 @@
+ 	if (SQLITE_OK != res) 
+ 		debug2 (DEBUG_DB, "Create view failed (%s) SQL: %s", err, sql);
+ 			       
+-	g_free (select);
++	sqlite3_free (select);
+ 	sqlite3_free (sql);
+ 	sqlite3_free (err);
+ }

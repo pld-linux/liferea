@@ -1,11 +1,10 @@
-diff -ur liferea-1.2-RC3-o/liferea.desktop.in liferea-1.2-RC3/liferea.desktop.in
---- liferea-1.2-RC3-o/liferea.desktop.in	2006-11-25 11:13:15.000000000 -0700
-+++ liferea-1.2-RC3/liferea.desktop.in	2006-11-26 12:07:55.000000000 -0700
-@@ -26,5 +26,5 @@
+diff -urN liferea-1.4.4/liferea.desktop.in liferea-1.4.4.new/liferea.desktop.in
+--- liferea-1.4.4/liferea.desktop.in	2007-09-26 20:59:22.000000000 +0200
++++ liferea-1.4.4.new/liferea.desktop.in	2007-10-05 18:42:54.000000000 +0200
+@@ -7,5 +7,5 @@
+ StartupNotify=true
  Terminal=false
  Type=Application
- Encoding=UTF-8
 -Categories=Network;News;
 +Categories=GTK;Network;News;
  Version=0.9.4
-Only in liferea-1.2-RC3: liferea.desktop.orig

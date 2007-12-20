@@ -1,4 +1,6 @@
-# TODO: create subpackage -lua (?)
+# TODO:
+# - create subpackage -lua (?)
+# - webkit support
 #
 # Conditional build:
 %bcond_without	dbus		# without DBUS support
@@ -13,30 +15,32 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.4.8
-Release:	3
+Version:	1.4.10
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	92806e9432481e65f21e8f86ff4a4fe2
+# Source0-md5:	7a60b58fc0044f72fb0d67f77eaffad5
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 Patch2:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
+%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
+BuildRequires:	gnutls-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	intltool >= 0.35.5
+BuildRequires:	libglade2-devel >= 2.0.0
 %{?with_gtkhtml:BuildRequires:	libgtkhtml-devel >= 2.6.3}
 BuildRequires:	libnotify-devel >= 0.3.2
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.19
+BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
 %{?with_lua:BuildRequires:	lua51-devel}
-%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel

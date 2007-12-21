@@ -30,6 +30,7 @@ BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
+BuildRequires:	gettext-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 BuildRequires:	intltool >= 0.35.5

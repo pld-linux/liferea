@@ -15,15 +15,16 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.4.10
-Release:	2
+Version:	1.4.11
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	7a60b58fc0044f72fb0d67f77eaffad5
+# Source0-md5:	b96a479a4b72560cbdd8df8b7efd24b3
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 Patch2:		%{name}-lua51.patch
+Patch3:		%{name}-no_versioned_soname.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
@@ -98,6 +99,7 @@ Moduł przeglądarki HTML dla Liferea oparty na Mozilli.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -143,15 +145,17 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/liferea
+%attr(755,root,root) %{_bindir}/liferea-add-feed
+%attr(755,root,root) %{_bindir}/liferea-bin
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/*.so.*.*.*
+%attr(755,root,root) %{_libdir}/%{name}/liblinotiflibnotify.so
 %{_iconsdir}/hicolor/48x48/apps/liferea.png
-%{_mandir}/pl/man1/liferea.1*
 %{_sysconfdir}/gconf/schemas/liferea.schemas
 %{_datadir}/%{name}
 %{_desktopdir}/*.desktop
 %{_mandir}/man1/liferea.1*
+%{_mandir}/pl/man1/liferea.1*
 %if %{with lua}
 %attr(755,root,root) %{_libdir}/%{name}/libliscrlua.so
 %endif
@@ -159,11 +163,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with gtkhtml}
 %files gtkhtml
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so*
+%attr(755,root,root) %{_libdir}/%{name}/liblihtmlg.so
 %endif
 
 %if %{with xulrunner}
 %files mozilla
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlx.so*
+%attr(755,root,root) %{_libdir}/%{name}/liblihtmlx.so
 %endif

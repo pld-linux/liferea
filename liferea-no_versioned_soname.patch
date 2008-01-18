@@ -1,0 +1,11 @@
+diff -urN liferea-1.4.11/src/notification/Makefile.am liferea-1.4.11.new/src/notification/Makefile.am
+--- liferea-1.4.11/src/notification/Makefile.am	2007-07-23 19:56:49.000000000 +0200
++++ liferea-1.4.11.new/src/notification/Makefile.am	2008-01-18 18:14:41.000000000 +0100
+@@ -20,6 +20,7 @@
+ # libnotify popup plugin
+ liblinotiflibnotify_la_LIBADD = $(PACKAGE_LIBS) $(LIBNOTIFY_LIBS)
+ liblinotiflibnotify_la_CFLAGS = $(PACKAGE_CFLAGS) $(LIBNOTIFY_CFLAGS)
++liblinotiflibnotify_la_LDFLAGS = -avoid-version -module
+ liblinotiflibnotify_la_SOURCES = notif_libnotify.c notif_libnotify.h notif_plugin.h 
+ 
+ pkglib_LTLIBRARIES = liblinotiflibnotify.la

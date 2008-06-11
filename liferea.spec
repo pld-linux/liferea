@@ -1,6 +1,5 @@
 # TODO:
 # - create subpackage -lua (?)
-# - webkit support
 #
 # Conditional build:
 %bcond_without	dbus		# without DBUS support
@@ -8,6 +7,7 @@
 %bcond_without	xulrunner	# without XULRunner backend
 %bcond_without	lua		# without LUA scripting support
 %bcond_with	nm		# with NetworkManager support
+%bcond_without	webkit		# without WebKit backend
 #
 %ifarch %{x8664}
 %undefine	with_gtkhtml	# GtkHTML backend disabled on x86_64
@@ -15,12 +15,12 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.4.15
-Release:	3
+Version:	1.4.16
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	e4ae96a0d41d94c31271ba791caec922
+# Source0-md5:	591aa637cdcc9ada395b26b93b4d8714
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 Patch2:		%{name}-lua51.patch
@@ -33,6 +33,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	gnutls-devel
 BuildRequires:	gtk+2-devel >= 2:2.8.0
+%{?with_webkit:BuildRequires:	gtk-webkit-devel}
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 2.0.0
 %{?with_gtkhtml:BuildRequires:	libgtkhtml-devel >= 2.6.3}
@@ -94,14 +95,24 @@ Mozilla HTML browser module for Liferea.
 %description mozilla -l pl.UTF-8
 Moduł przeglądarki HTML dla Liferea oparty na Mozilli.
 
+%package webkit
+Summary:	WebKit module for Liferea
+Summary(pl.UTF-8):	Moduł WebKit dla Liferea
+Group:		X11/Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+Provides:	%{name}-backend = %{version}-%{release}
+
+%description webkit
+WebKit module for Liferea.
+
+%description webkit -l pl.UTF-8
+Moduł WebKit dla Liferea.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-%{__sed} -i -e 's,cz,cs,' po/LINGUAS
-mv po/{cz,cs}.po
 
 %build
 %{__glib_gettextize}
@@ -117,7 +128,8 @@ mv po/{cz,cs}.po
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
 	%{!?with_lua: --disable-lua} \
 	%{!?with_nm: --disable-nm} \
-	%{!?with_xulrunner: --disable-xulrunner}
+	%{!?with_xulrunner: --disable-xulrunner} \
+	%{!?with_webkit: --disable-webkit}
 %{__make}
 
 %install
@@ -172,4 +184,10 @@ rm -rf $RPM_BUILD_ROOT
 %files mozilla
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/liblihtmlx.so
+%endif
+
+%if %{with webkit}
+%files webkit
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/liblihtmlw.so
 %endif

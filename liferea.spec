@@ -16,7 +16,7 @@ Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
 Version:	1.4.16b
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
@@ -47,7 +47,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
-%{?with_xulrunner:BuildRequires:	xulrunner-devel}
+%{?with_xulrunner:BuildRequires:	xulrunner-devel >= 1.9-5}
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
@@ -124,6 +124,7 @@ Moduł WebKit dla Liferea.
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
+	--disable-gecko \
 	%{!?with_dbus: --disable-dbus} \
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
 	%{!?with_lua: --disable-lua} \

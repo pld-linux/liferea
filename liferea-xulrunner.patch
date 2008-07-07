@@ -1,15 +1,17 @@
-diff -urN liferea-1.2.7/src/mozilla/Makefile.am liferea-1.2.7.new/src/mozilla/Makefile.am
---- liferea-1.2.7/src/mozilla/Makefile.am	2006-08-16 01:08:28.000000000 +0200
-+++ liferea-1.2.7.new/src/mozilla/Makefile.am	2007-02-24 21:51:01.000000000 +0100
-@@ -37,14 +37,20 @@
+diff -urN liferea-1.4.16b/src/mozilla/Makefile.am liferea-1.4.16b.new/src/mozilla/Makefile.am
+--- liferea-1.4.16b/src/mozilla/Makefile.am	2007-07-23 19:56:53.000000000 +0200
++++ liferea-1.4.16b.new/src/mozilla/Makefile.am	2008-07-07 18:58:58.000000000 +0200
+@@ -37,14 +37,22 @@
  
  ## the XulRunner support module
  
 +XULRUNNER_EXTRA_CFLAGS = \
++	-I/usr/include/xulrunner \
 +	-I/usr/include/xulrunner/dom \
++	-I/usr/include/xulrunner/gtkembedmoz \
 +	-I/usr/include/xulrunner/necko \
-+	-I/usr/include/xulrunner/pref \
-+	-I/usr/include/xulrunner/webbrwsr
++	-I/usr/include/xulrunner/webbrwsr \
++	-I/usr/include/xulrunner/xpcom
 +
  liblihtmlx_la_SOURCES = \
  	mozembed.c mozembed.h \
@@ -19,16 +21,24 @@ diff -urN liferea-1.2.7/src/mozilla/Makefile.am liferea-1.2.7.new/src/mozilla/Ma
  liblihtmlx_la_LIBADD = $(PACKAGE_LIBS) $(XULRUNNER_LIBS) $(INTLLIBS)
 -liblihtmlx_la_CFLAGS = $(XULRUNNER_CFLAGS) $(PACKAGE_CFLAGS)  -DXULRUNNER_HOME=\""$(XULRUNNER_HOME)\""
 -liblihtmlx_la_CXXFLAGS = $(XULRUNNER_CFLAGS) $(PACKAGE_CFLAGS)
-+liblihtmlx_la_CFLAGS = $(XULRUNNER_CFLAGS) $(XULRUNNER_EXTRA_CFLAGS) $(PACKAGE_CFLAGS) -DXULRUNNER_HOME=\""$(XULRUNNER_HOME)\""
++liblihtmlx_la_CFLAGS = $(XULRUNNER_CFLAGS) $(XULRUNNER_EXTRA_CFLAGS) $(PACKAGE_CFLAGS)  -DXULRUNNER_HOME=\""$(XULRUNNER_HOME)\""
 +liblihtmlx_la_CXXFLAGS = $(XULRUNNER_CFLAGS) $(XULRUNNER_EXTRA_CFLAGS) $(PACKAGE_CFLAGS)
  
  if PLATFORM_WIN32
  
-@@ -53,6 +59,6 @@
+diff -urN liferea-1.4.16b/src/mozilla/xulrunner.c liferea-1.4.16b.new/src/mozilla/xulrunner.c
+--- liferea-1.4.16b/src/mozilla/xulrunner.c	2007-07-23 19:56:53.000000000 +0200
++++ liferea-1.4.16b.new/src/mozilla/xulrunner.c	2008-07-07 18:54:44.000000000 +0200
+@@ -30,10 +30,12 @@
  
- else
+ static void xulrunner_init(void) {
+ 	
++#ifndef XPCOM_GLUE
+ 	/* gtk_moz_embed_set_comp_path() must not be called
+ 	   without a component path for XulRunner. Passing
+ 	   NULL will crash Liferea. */
+ 	gtk_moz_embed_set_comp_path(XULRUNNER_HOME);
++#endif
  
--liblihtmlx_la_LDFLAGS = -module -avoid-version
-+liblihtmlx_la_LDFLAGS = -R$(XULRUNNER_HOME) -module -avoid-version
- 
- endif
+ 	mozembed_init();	
+ }

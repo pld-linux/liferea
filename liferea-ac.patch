@@ -1,0 +1,11 @@
+diff -urN liferea-1.4.22d/configure.ac liferea-1.4.22d.new/configure.ac
+--- liferea-1.4.22d/configure.ac	2008-11-14 00:12:52.000000000 +0100
++++ liferea-1.4.22d.new/configure.ac	2008-11-22 12:36:30.000000000 +0100
+@@ -21,6 +21,7 @@
+ 
+ AC_ISC_POSIX
+ AC_PROG_CC
++AC_PROG_CXX
+ AM_PROG_CC_STDC
+ AM_PROG_CC_C_O
+ AC_HEADER_STDC

@@ -15,15 +15,16 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.4.20
-Release:	3
+Version:	1.4.22d
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	c52212f73276aecd3293fb9d8e232d28
+# Source0-md5:	0a942170ee16a61330982a1cbc7f936f
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-xulrunner.patch
 Patch2:		%{name}-lua51.patch
+Patch3:		%{name}-ac.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
@@ -113,23 +114,23 @@ Moduł WebKit dla Liferea.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
 %{__intltoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__libtoolize}
 %{__autoheader}
 %{__automake}
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
-	--disable-gecko \
 	%{!?with_dbus: --disable-dbus} \
 	%{!?with_gtkhtml: --disable-gtkhtml2} \
 	%{!?with_lua: --disable-lua} \
 	%{!?with_nm: --disable-nm} \
-	%{!?with_xulrunner: --disable-xulrunner} \
+	%{!?with_xulrunner: --disable-gecko} \
 	%{!?with_webkit: --disable-webkit}
 %{__make}
 

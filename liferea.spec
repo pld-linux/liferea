@@ -4,41 +4,40 @@
 # Conditional build:
 %bcond_without	dbus		# without D-Bus support
 %bcond_without	lua		# without LUA scripting support
-%bcond_with	nm		# with NetworkManager support
+%bcond_without	nm		# with NetworkManager support
 #
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.5.6
+Version:	1.5.15
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	6da515071c10d1daaedbf57526f5e4cf
+# Source0-md5:	39f45911900dc7468acbab3c4e5a3c0f
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.6
 BuildRequires:	avahi-glib-devel >= 0.6.0
-BuildRequires:	curl-devel >= 7.15.0
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.16.0
-BuildRequires:	gtk+2-devel >= 2:2.10.0
-BuildRequires:	gtk-webkit-devel >= 1.0
+BuildRequires:	gtk+2-devel >= 2:2.16.0
+BuildRequires:	gtk-webkit-devel >= 1.1.1
 BuildRequires:	intltool >= 0.35.5
-BuildRequires:	libglade2-devel >= 2.0.0
+BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.3.2
+BuildRequires:	libsoup-devel >= 2.26.0
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
 %{?with_lua:BuildRequires:	lua51-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	sqlite3-devel >= 3.3.0
+BuildRequires:	sqlite3-devel >= 3.6.10
 BuildRequires:	xorg-lib-libSM-devel
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
@@ -104,9 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/liferea
 %attr(755,root,root) %{_bindir}/liferea-add-feed
-%attr(755,root,root) %{_bindir}/liferea-bin
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlw.so
 %attr(755,root,root) %{_libdir}/%{name}/liblinotiflibnotify.so
 %if %{with lua}
 %attr(755,root,root) %{_libdir}/%{name}/libliscrlua.so

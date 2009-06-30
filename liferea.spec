@@ -6,15 +6,17 @@
 %bcond_without	lua		# without LUA scripting support
 %bcond_without	nm		# with NetworkManager support
 #
+%define		_rc	rc6
+#
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.5.15
-Release:	1
+Version:	1.6.0
+Release:	0.%{_rc}.1
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	39f45911900dc7468acbab3c4e5a3c0f
+Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}-%{_rc}.tar.gz
+# Source0-md5:	faea2fd081c0cd31b279c22aba3632fa
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
@@ -26,11 +28,11 @@ BuildRequires:	avahi-glib-devel >= 0.6.0
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtk-webkit-devel >= 1.1.1
+BuildRequires:	gtk-webkit-devel >= 1.1.7
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.3.2
-BuildRequires:	libsoup-devel >= 2.26.0
+BuildRequires:	libsoup-devel >= 2.26.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
@@ -55,7 +57,7 @@ Liferea jest klonem, napisanym za pomocą biblioteki GTK+, programu
 FeedReader.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_rc}
 %patch0 -p1
 %patch1 -p1
 

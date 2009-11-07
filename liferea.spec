@@ -115,9 +115,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/liferea.desktop
 %{_mandir}/man1/liferea.1*
 %{_mandir}/pl/man1/liferea.1*
-
-%if %{with webkit}
-%files webkit
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlw.so
-%endif

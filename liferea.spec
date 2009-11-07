@@ -1,5 +1,3 @@
-# TODO:
-# - create subpackage -lua (?)
 #
 # Conditional build:
 %bcond_without	dbus		# without D-Bus support
@@ -9,12 +7,12 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.6.0
-Release:	2
+Version:	1.7.1
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	7c532101d3c9cfd71b76d3a8a82622fa
+# Source0-md5:	992614a41b5341b308e6450dd9a5ad4f
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
@@ -22,16 +20,16 @@ BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
-BuildRequires:	avahi-glib-devel >= 0.6.0
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtk-webkit-devel >= 1.1.7
+BuildRequires:	gtk-webkit-devel >= 1.1.10
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.3.2
 BuildRequires:	libsoup-devel >= 2.26.1
 BuildRequires:	libtool
+BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
 %{?with_lua:BuildRequires:	lua51-devel}
@@ -81,8 +79,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
-
 %find_lang %{name}
 
 %post
@@ -100,14 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/liferea
 %attr(755,root,root) %{_bindir}/liferea-add-feed
-%dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/liblinotiflibnotify.so
-%if %{with lua}
-%attr(755,root,root) %{_libdir}/%{name}/libliscrlua.so
-%endif
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_sysconfdir}/gconf/schemas/liferea.schemas
@@ -115,9 +106,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/liferea.desktop
 %{_mandir}/man1/liferea.1*
 %{_mandir}/pl/man1/liferea.1*
-
-%if %{with webkit}
-%files webkit
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/liblihtmlw.so
-%endif

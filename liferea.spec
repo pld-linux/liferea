@@ -7,12 +7,12 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.7.1
+Version:	1.7.2
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	992614a41b5341b308e6450dd9a5ad4f
+# Source0-md5:	60da146d031972005026c8052ea7c809
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
@@ -22,12 +22,12 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtk-webkit-devel >= 1.1.10
+BuildRequires:	gtk+2-devel >= 2:2.18.0
+BuildRequires:	gtk-webkit-devel >= 1.1.11
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.3.2
-BuildRequires:	libsoup-devel >= 2.26.1
+BuildRequires:	libsoup-devel >= 2.28.0
 BuildRequires:	libtool
 BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
@@ -37,9 +37,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel >= 3.6.10
 BuildRequires:	xorg-lib-libSM-devel
-Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
+Requires:	gtk+2 >= 2.18.0
 Obsoletes:	liferea-gtkhtml
 Obsoletes:	liferea-mozilla
 Obsoletes:	liferea-webkit

@@ -1,20 +1,18 @@
 #
 # Conditional build:
 %bcond_without	dbus		# without D-Bus support
-%bcond_without	lua		# without LUA scripting support
 %bcond_without	nm		# with NetworkManager support
 #
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.7.3
+Version:	1.7.4
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	90b7f8166edfd9e1ef11c6ef14c4e53e
+Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
+# Source0-md5:	69ece60acc93a58cffb66e0e4f753704
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
@@ -32,7 +30,6 @@ BuildRequires:	libtool
 BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
-%{?with_lua:BuildRequires:	lua51-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel >= 3.6.10
@@ -55,7 +52,6 @@ FeedReader.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__glib_gettextize}
@@ -68,7 +64,6 @@ FeedReader.
 %configure \
 	--disable-schemas-install \
 	%{!?with_dbus: --disable-dbus} \
-	%{!?with_lua: --disable-lua} \
 	%{!?with_nm: --disable-nm}
 
 %{__make}

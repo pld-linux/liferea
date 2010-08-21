@@ -25,6 +25,7 @@ BuildRequires:	automake >= 1:1.6
 BuildRequires:	avahi-glib-devel >= 0.6.0
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
+BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	gtk-webkit-devel >= 1.1.7
 BuildRequires:	intltool >= 0.35.5

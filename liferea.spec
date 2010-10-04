@@ -9,12 +9,12 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.6.4
+Version:	1.6.5
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	921b5778f5cc67a60eec4669b6048844
+# Source0-md5:	b5a2c0803eec5d0aff0b9ca4114eaf16
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
 URL:		http://liferea.sourceforge.net/
@@ -24,6 +24,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
 BuildRequires:	avahi-glib-devel >= 0.6.0
 %{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
+BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gtk+2-devel >= 2:2.16.0

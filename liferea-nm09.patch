@@ -1,0 +1,36 @@
+Based on http://liferea.git.sourceforge.net/git/gitweb.cgi?p=liferea/liferea;a=commitdiff;h=fc49ae0c9c1add55754ff5731c586b22096fbb06
+
+diff -up liferea-1.6.5/src/update.c.nm09 liferea-1.6.5/src/update.c
+--- liferea-1.6.5/src/update.c.nm09	2011-03-27 10:40:26.045331006 -0700
++++ liferea-1.6.5/src/update.c	2011-03-27 11:06:53.819481098 -0700
+@@ -589,6 +589,17 @@ update_process_finished_job (updateJobPt
+ }
+ 
+ #ifdef USE_NM
++static gboolean
++is_nm_connected (guint state)
++{
++	if (state == 3 ||  /* NM_STATE_CONNECTED */
++           state == 50 || /* NM_STATE_CONNECTED_LOCAL */
++           state == 60 || /* NM_STATE_CONNECTED_SITE */
++           state == 70)   /* NM_STATE_CONNECTED_GLOBAL */
++               return TRUE;
++	return FALSE;
++}
++
+ static void
+ update_network_monitor (libnm_glib_ctx *ctx, gpointer user_data)
+ {
+@@ -600,10 +611,10 @@ update_network_monitor (libnm_glib_ctx *
+ 	state = libnm_glib_get_network_state (ctx);
+ 	online = network_is_online ();
+ 
+-	if (online && state == LIBNM_NO_NETWORK_CONNECTION) {
++	if (online && !is_nm_connected (state)) {
+ 		debug0 (DEBUG_UPDATE, "network manager: no network connection -> going offline");
+ 		network_set_online (FALSE);
+-	} else if (!online && state == LIBNM_ACTIVE_NETWORK_CONNECTION) {
++	} else if (!online && is_nm_connected (state)) {
+ 		debug0 (DEBUG_UPDATE, "network manager: active connection -> going online");
+ 		network_set_online (TRUE);
+ 	}

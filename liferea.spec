@@ -17,6 +17,8 @@ Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
 # Source0-md5:	b5a2c0803eec5d0aff0b9ca4114eaf16
 Patch0:		%{name}-desktop.patch
 Patch1:		%{name}-lua51.patch
+Patch2:		%{name}-libnotify-0.7.patch
+Patch3:		%{name}-nm09.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 %{?with_nm:BuildRequires:	NetworkManager-devel}
@@ -31,7 +33,7 @@ BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	gtk-webkit-devel >= 1.1.7
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 1:2.0.0
-BuildRequires:	libnotify-devel >= 0.3.2
+BuildRequires:	libnotify-devel >= 0.7.0
 BuildRequires:	libsoup-devel >= 2.26.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
@@ -60,6 +62,8 @@ FeedReader.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}

@@ -3,15 +3,16 @@
 %bcond_without	dbus		# without D-Bus support
 %bcond_without	nm		# with NetworkManager support
 #
+%define		_rc	RC1
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.7.5
+Version:	1.8
 Release:	1
-License:	GPL v2
+License:	GPL v2+
 Group:		X11/Applications/Networking
-Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	8d5561fb5b50c005fb6e2f761be05554
+Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}-%{_rc}.tar.gz
+# Source0-md5:	f840951cbed95bd8e774318d24ba64d5
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
@@ -51,7 +52,7 @@ Liferea jest klonem, napisanym za pomocą biblioteki GTK+, programu
 FeedReader.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{_rc}
 %patch0 -p1
 
 %build

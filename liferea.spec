@@ -1,33 +1,25 @@
-#
-# Conditional build:
-%bcond_without	dbus		# without D-Bus support
-%bcond_without	nm		# with NetworkManager support
-#
-%define		_rc	RC1
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.8
+Version:	1.8.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
-Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}-%{_rc}.tar.gz
-# Source0-md5:	f840951cbed95bd8e774318d24ba64d5
+Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
+# Source0-md5:	6313e3049b586be110c9402900609fe0
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
-%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
-%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gtk+2-devel >= 2:2.18.0
-BuildRequires:	gtk-webkit-devel >= 1.1.11
-BuildRequires:	intltool >= 0.35.5
+BuildRequires:	gtk-webkit-devel >= 1.2.2
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	json-glib-devel
-BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.3.2
-BuildRequires:	libsoup-devel >= 2.28.0
+BuildRequires:	libsoup-devel >= 2.28.2
 BuildRequires:	libtool
 BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
@@ -36,9 +28,11 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel >= 3.6.10
 BuildRequires:	xorg-lib-libSM-devel
-Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
-Requires:	gtk+2 >= 2.18.0
+Requires(post,postun):	gtk-update-icon-cache
+Requires:	glib2 >= 1:2.26.0
+Requires:	gtk+2 >= 2:2.18.0
+Requires:	hicolor-icon-theme
 Obsoletes:	liferea-gtkhtml
 Obsoletes:	liferea-mozilla
 Obsoletes:	liferea-webkit
@@ -52,7 +46,7 @@ Liferea jest klonem, napisanym za pomocą biblioteki GTK+, programu
 FeedReader.
 
 %prep
-%setup -q -n %{name}-%{version}-%{_rc}
+%setup -q
 %patch0 -p1
 
 %build
@@ -65,9 +59,7 @@ FeedReader.
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
-	--disable-silent-rules \
-	%{!?with_dbus: --disable-dbus} \
-	%{!?with_nm: --disable-nm}
+	--disable-silent-rules
 
 %{__make}
 

@@ -1,55 +1,42 @@
-# TODO:
-# - create subpackage -lua (?)
-#
-# Conditional build:
-%bcond_without	dbus		# without D-Bus support
-%bcond_without	lua		# without LUA scripting support
-%bcond_without	nm		# with NetworkManager support
-#
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.6.6b
-Release:	2
+Version:	1.8.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	1db10281f5ade2fa350f2a245733a74e
+# Source0-md5:	6313e3049b586be110c9402900609fe0
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-lua51.patch
-Patch2:		%{name}-libnotify-0.7.patch
-Patch3:		%{name}-nm09.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
-%{?with_nm:BuildRequires:	NetworkManager-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
 BuildRequires:	avahi-glib-devel >= 0.6.0
-%{?with_dbus:BuildRequires:	dbus-glib-devel >= 0.33}
-BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
+BuildRequires: 	geoclue-devel
+BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gstreamer-devel >= 0.10
-BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtk-webkit-devel >= 1.1.7
-BuildRequires:	intltool >= 0.35.5
+BuildRequires:	gtk+2-devel >= 2:2.18.0
+BuildRequires:	gtk-webkit-devel >= 1.2.2
+BuildRequires:	intltool >= 0.40.0
+BuildRequires:	json-glib-devel
 BuildRequires:	libglade2-devel >= 1:2.0.0
-%if "%{pld_release}" != "ti"
 BuildRequires:	libnotify-devel >= 0.7.0
-%else
-BuildRequires:	libnotify-devel
-%endif
-BuildRequires:	libsoup-devel >= 2.26.1
+BuildRequires:	libsoup-devel >= 2.28.2
 BuildRequires:	libtool
+BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
-%{?with_lua:BuildRequires:	lua51-devel}
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	sqlite3-devel >= 3.6.10
 BuildRequires:	xorg-lib-libSM-devel
+Requires(post,preun):	GConf2
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
-Requires(post,preun):	GConf2
+Requires:	glib2 >= 1:2.26.0
+Requires:	gtk+2 >= 2:2.18.0
 Obsoletes:	liferea-gtkhtml
 Obsoletes:	liferea-mozilla
 Obsoletes:	liferea-webkit
@@ -65,11 +52,6 @@ FeedReader.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%if "%{pld_release}" != "ti"
-%patch2 -p1
-%endif
-%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -81,9 +63,7 @@ FeedReader.
 %{__autoconf}
 %configure \
 	--disable-schemas-install \
-	%{!?with_dbus: --disable-dbus} \
-	%{!?with_lua: --disable-lua} \
-	%{!?with_nm: --disable-nm}
+	--disable-silent-rules
 
 %{__make}
 
@@ -92,8 +72,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.la
 
 %find_lang %{name}
 
@@ -112,18 +90,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README
+%doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/liferea
 %attr(755,root,root) %{_bindir}/liferea-add-feed
-%dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/liblinotiflibnotify.so
-%if %{with lua}
-%attr(755,root,root) %{_libdir}/%{name}/libliscrlua.so
-%endif
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_sysconfdir}/gconf/schemas/liferea.schemas
 %{_datadir}/%{name}
 %{_desktopdir}/liferea.desktop
 %{_mandir}/man1/liferea.1*
-%lang(pl) %{_mandir}/pl/man1/liferea.1*
+%{_mandir}/pl/man1/liferea.1*

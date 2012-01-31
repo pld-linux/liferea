@@ -13,8 +13,8 @@ BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.6
 BuildRequires:	avahi-glib-devel >= 0.6.0
+BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
-BuildRequires: 	geoclue-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gstreamer-devel >= 0.10
 BuildRequires:	gtk+2-devel >= 2:2.18.0

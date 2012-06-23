@@ -1,18 +1,18 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.8.0
+Version:	1.8.6
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	6313e3049b586be110c9402900609fe0
+# Source0-md5:	6e6be1f4a3b87babb71fa06e7d209728
 Patch0:		%{name}-desktop.patch
+Patch1:		automake-1.12.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.6
-BuildRequires:	avahi-glib-devel >= 0.6.0
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -30,7 +30,7 @@ BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	sqlite3-devel >= 3.6.10
+BuildRequires:	sqlite3-devel >= 3.7.0
 BuildRequires:	xorg-lib-libSM-devel
 Requires(post,preun):	GConf2
 Requires(post,postun):	gtk-update-icon-cache
@@ -52,6 +52,7 @@ FeedReader.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__glib_gettextize}

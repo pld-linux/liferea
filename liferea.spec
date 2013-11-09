@@ -1,41 +1,39 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.8.9
+Version:	1.10.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
-Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.gz
-# Source0-md5:	6629ffe3ed768c4ed41b2b1af5650da9
+Source0:	http://downloads.sourceforge.net/liferea/%{name}-%{version}.tar.bz2
+# Source0-md5:	36dcec17ecb4bced0efb58564e80e066
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/
-BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	geoclue-devel
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gstreamer-devel >= 0.10
-BuildRequires:	gtk+2-devel >= 2:2.18.0
-BuildRequires:	gtk-webkit-devel >= 1.2.2
+BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	gsettings-desktop-schemas-devel
+BuildRequires:	gtk+3-devel >= 3.4.0
+BuildRequires:	gtk-webkit3-devel
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	json-glib-devel
-BuildRequires:	libglade2-devel >= 1:2.0.0
 BuildRequires:	libnotify-devel >= 0.7.0
+BuildRequires:	libpeas-devel >= 1.0.0
+BuildRequires:	libpeas-gtk-devel >= 1.0.0
 BuildRequires:	libsoup-devel >= 2.28.2
 BuildRequires:	libtool
-BuildRequires:	libunique-devel
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	libxslt-devel >= 1.1.19
+BuildRequires:	pango-devel >= 1:1.4.0
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.592
 BuildRequires:	sqlite3-devel >= 3.7.0
-BuildRequires:	xorg-lib-libSM-devel
-Requires(post,preun):	GConf2
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires:	glib2 >= 1:2.26.0
-Requires:	gtk+2 >= 2:2.18.0
+Suggests:	liferea-plugin-gnome-keyring
+Suggests:	liferea-plugin-media-player
 Obsoletes:	liferea-gtkhtml
 Obsoletes:	liferea-mozilla
 Obsoletes:	liferea-webkit
@@ -47,6 +45,22 @@ Liferea is a GTK+ clone of FeedReader.
 %description -l pl.UTF-8
 Liferea jest klonem, napisanym za pomocą biblioteki GTK+, programu
 FeedReader.
+
+%package plugin-gnome-keyring
+Summary:	Liferea GNOME Keyring plugin
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-pygobject3
+
+%description plugin-gnome-keyring
+Allow Liferea to use GNOME keyring as password store.
+
+%package plugin-media-player
+Summary:	Liferea media player plugin
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-pygobject3
+
+%description plugin-media-player
+Play music and videos directly from Liferea.
 
 %prep
 %setup -q
@@ -75,14 +89,14 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang %{name}
 
 %post
-%gconf_schema_install liferea.schemas
+%glib_compile_schemas
 %update_icon_cache hicolor
-
-%preun
-%gconf_schema_uninstall liferea.schemas
+%update_desktop_database_post
 
 %postun
+%glib_compile_schemas
 %update_icon_cache hicolor
+%update_desktop_database_post
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -92,10 +106,24 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/liferea
 %attr(755,root,root) %{_bindir}/liferea-add-feed
+%dir %{_libdir}/liferea
+%dir %{_libdir}/liferea/girepository-1.0
+%{_libdir}/liferea/girepository-1.0/Liferea-3.0.typelib
+%dir %{_libdir}/liferea/plugins
+%{_datadir}/glib-2.0/schemas/net.sf.liferea.gschema.xml
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
-%{_sysconfdir}/gconf/schemas/liferea.schemas
 %{_datadir}/%{name}
 %{_desktopdir}/liferea.desktop
 %{_mandir}/man1/liferea.1*
 %{_mandir}/pl/man1/liferea.1*
+
+%files plugin-gnome-keyring
+%defattr(644,root,root,755)
+%{_libdir}/liferea/plugins/gnome-keyring.plugin
+%{_libdir}/liferea/plugins/gnome-keyring.py
+
+%files plugin-media-player
+%defattr(644,root,root,755)
+%{_libdir}/liferea/plugins/media-player.plugin
+%{_libdir}/liferea/plugins/media-player.py

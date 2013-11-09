@@ -5,6 +5,6 @@ diff -urN liferea-1.4.4/liferea.desktop.in liferea-1.4.4.new/liferea.desktop.in
  StartupNotify=true
  Terminal=false
  Type=Application
--Categories=Network;News;
-+Categories=GTK;Network;News;
+-Categories=Network;Feed;
++Categories=GTK;Network;Feed;
  Version=0.9.4

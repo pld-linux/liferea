@@ -5,7 +5,7 @@ Version:	1.10.6
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
-Source0:	http://github.com/lwindolf/liferea/archive/v%{version}.tar.gz?/%{name}-%{version}.tar.gz
+Source0:	http://github.com/lwindolf/liferea/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	e013e60d0fb901d7e57e340d3c33f570
 Patch0:		%{name}-desktop.patch
 URL:		http://liferea.sourceforge.net/

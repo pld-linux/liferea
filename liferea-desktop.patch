@@ -7,4 +7,4 @@ diff -urN liferea-1.4.4/liferea.desktop.in liferea-1.4.4.new/liferea.desktop.in
  Type=Application
 -Categories=Network;Feed;
 +Categories=GTK;Network;Feed;
- Version=0.9.4
+ Version=1.1

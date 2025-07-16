@@ -67,9 +67,10 @@ Play music and videos directly from Liferea.
 %patch -P0 -p1
 
 %build
+%{__autopoint}
 %{__glib_gettextize}
 %{__intltoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__libtoolize}
 %{__autoheader}
 %{__automake}

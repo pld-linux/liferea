@@ -1,10 +1,11 @@
-diff -urN liferea-1.4.4/liferea.desktop.in liferea-1.4.4.new/liferea.desktop.in
---- liferea-1.4.4/liferea.desktop.in	2007-09-26 20:59:22.000000000 +0200
-+++ liferea-1.4.4.new/liferea.desktop.in	2007-10-05 18:42:54.000000000 +0200
-@@ -7,5 +7,5 @@
+diff -ur liferea-1.10.13.org/liferea.desktop.in liferea-1.10.13/liferea.desktop.in
+--- liferea-1.10.13.org/liferea.desktop.in	2015-01-07 16:54:43.000000000 +0100
++++ liferea-1.10.13/liferea.desktop.in	2025-07-16 22:18:08.104327625 +0200
+@@ -9,6 +9,6 @@
  StartupNotify=true
  Terminal=false
  Type=Application
 -Categories=Network;Feed;
 +Categories=GTK;Network;Feed;
  Version=1.1
+ MimeType=application/rss+xml;application/atom+xml;application/rdf+xml;

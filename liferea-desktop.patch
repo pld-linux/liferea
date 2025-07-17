@@ -1,11 +1,11 @@
-diff -ur liferea-1.10.13.org/liferea.desktop.in liferea-1.10.13/liferea.desktop.in
---- liferea-1.10.13.org/liferea.desktop.in	2015-01-07 16:54:43.000000000 +0100
-+++ liferea-1.10.13/liferea.desktop.in	2025-07-16 22:18:08.104327625 +0200
-@@ -9,6 +9,6 @@
+--- liferea-1.14.6/net.sourceforge.liferea.desktop.in~	2023-08-02 16:52:22.000000000 +0200
++++ liferea-1.14.6/net.sourceforge.liferea.desktop.in	2025-07-17 12:40:32.033868834 +0200
+@@ -10,7 +10,7 @@ Icon=net.sourceforge.liferea
  StartupNotify=true
  Terminal=false
  Type=Application
--Categories=Network;Feed;
-+Categories=GTK;Network;Feed;
+-Categories=Network;News;
++Categories=GTK;Network;News;
+ X-Ubuntu-Gettext-Domain=liferea
  Version=1.1
- MimeType=application/rss+xml;application/atom+xml;application/rdf+xml;
+ MimeType=application/rss+xml;application/atom+xml;application/rdf+xml;x-scheme-handler/feed

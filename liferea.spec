@@ -1,13 +1,14 @@
 Summary:	A RSS feed reader
 Summary(pl.UTF-8):	Program do pobierania informacji w formacie RSS
 Name:		liferea
-Version:	1.10.13
-Release:	3
+Version:	1.14.6
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Networking
 Source0:	http://github.com/lwindolf/liferea/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	9f1d952ff670f48aa92f5cf2983e928e
+# Source0-md5:	9e64f58ad51e1086b1823b52658cf85a
 Patch0:		%{name}-desktop.patch
+Patch1:		libxml2.patch
 URL:		http://liferea.sourceforge.net/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
@@ -15,7 +16,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gsettings-desktop-schemas-devel
 BuildRequires:	gtk+3-devel >= 3.4.0
-BuildRequires:	gtk-webkit3-devel
+BuildRequires:	gtk-webkit4-devel
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	json-glib-devel
 BuildRequires:	libnotify-devel >= 0.7.0
@@ -65,6 +66,7 @@ Play music and videos directly from Liferea.
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__autopoint}
@@ -76,7 +78,6 @@ Play music and videos directly from Liferea.
 %{__automake}
 %{__autoconf}
 %configure \
-	--disable-schemas-install \
 	--disable-silent-rules
 
 %{__make}
@@ -104,21 +105,25 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README
+%doc AUTHORS ChangeLog README.md
 %attr(755,root,root) %{_bindir}/liferea
 %attr(755,root,root) %{_bindir}/liferea-add-feed
 %dir %{_libdir}/liferea
 %dir %{_libdir}/liferea/girepository-1.0
 %{_libdir}/liferea/girepository-1.0/Liferea-3.0.typelib
-%dir %{_libdir}/liferea/plugins
-%{_datadir}/appdata/liferea.appdata.xml
+%{_libdir}/liferea/plugins
+%dir %{_libdir}/liferea/web-extension
+%attr(755,root,root) %{_libdir}/liferea/web-extension/*.so
 %{_datadir}/glib-2.0/schemas/net.sf.liferea.gschema.xml
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_datadir}/%{name}
-%{_desktopdir}/liferea.desktop
+%{_desktopdir}/net.sourceforge.liferea.desktop
+%{_datadir}/dbus-1/services/net.sourceforge.liferea.service
+%{_datadir}/metainfo/net.sourceforge.liferea.appdata.xml
+%{_datadir}/GConf/gsettings/liferea.convert
 %{_mandir}/man1/liferea.1*
-%{_mandir}/pl/man1/liferea.1*
+%{_mandir}/it/man1/liferea.1*
 
 %files plugin-gnome-keyring
 %defattr(644,root,root,755)
